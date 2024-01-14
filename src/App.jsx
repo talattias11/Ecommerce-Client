@@ -1,4 +1,10 @@
-import { Link, Route, Routes } from "react-router-dom";
+import {useParams ,Link, Route, Routes } from "react-router-dom";
+
+const products = [
+  {id: '101', name: 'apple', price: 5},
+  {id: '102', name: 'bannana', price: 10},
+  {id: '103', name: 'pear', price: 15}
+]
 
 export default function App() {
   return <>
@@ -10,9 +16,6 @@ export default function App() {
         <li>
           <Link to='/products'>Catalog</Link>
         </li>
-        <li>
-          <Link to='/'>Home</Link>
-        </li>
       </ul>
     </nav>
       <Routes>
@@ -23,12 +26,27 @@ export default function App() {
     </>
 }
 
-function Home(params) {
+function Home() {
   return 'home'
 }
-function Catalog(params) {
-  return 'catalog'
+function Catalog() {
+  const productsListItems = products.map(p => <li>
+    <Link to={`/products/${p.id}`}>{p.name}</Link>
+  </li>)
+  return <>
+    <ul>
+    {productsListItems}
+    </ul>
+  </>
 }
 function ProductPage() {
-  return 'product page'
+  const{ id } = useParams();
+
+  const product = products.find(p => p.id === id)
+
+  return <>
+    <pre>
+      {JSON.stringify(product, null, 2)}
+    </pre>
+  </>
 }
