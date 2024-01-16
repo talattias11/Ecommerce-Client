@@ -23,3 +23,11 @@ body {
   padding-block: .5rem;
   gap: .5rem;
 }
+
+.page-button {
+  padding: .25rem .5rem;
+}
+
+.page-button-selected {
+  background-color: red;
+}
