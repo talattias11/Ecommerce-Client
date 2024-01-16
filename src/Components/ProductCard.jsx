@@ -6,6 +6,6 @@ export default function ProductCard({product}) {
       <Link to={`/products/${product.id}`}>
         <h2>{product.name}</h2>
       </Link>
-      <p>{product.price}</p>
+      <p>$ {product.price}</p>
     </div>
 }

@@ -16,3 +16,10 @@ body {
   align-items: center;
   background-color: hsl(0, 0%, 10%);
 }
+
+.pages-links {
+  display: flex;
+  justify-content: center;
+  padding-block: .5rem;
+  gap: .5rem;
+}
