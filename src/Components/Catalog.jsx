@@ -1,16 +1,27 @@
-import { useState } from "react";
-import { products } from "../products";
+import { useEffect, useState } from "react";
 import CatalogPagesLinks from "./CatalogPagesLinks";
 import CatalogBoard from "./CatalogBoard";
-import { itemsPerPage } from "./constants";
+import { itemsPerPage, apiUrl } from "./constants";
 import CatalogControls from "./CatalogControls";
 
 export default function Catalog() {
-  const [searchedProducts, setSearchedProducts] = useState(products);
+  const [allProducts, setAllProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [searchedProducts, setSearchedProducts] = useState(allProducts);
   const [curPageNum, setCurPageNum] = useState(1);
 
+  useEffect(() => {
+    (async () => {
+      const res = await fetch(apiUrl);
+      const products = await res.json();
+      setAllProducts(products)
+      setSearchedProducts(products)
+      setIsLoading(false);
+    })();
+  }, []);
+
   function handleSearch(str, sortCategory) {
-    const filteredList = products.filter(p =>
+    const filteredList = allProducts.filter(p =>
       p.name.includes(str));
 
     switch (sortCategory) {
@@ -25,6 +36,8 @@ export default function Catalog() {
     setSearchedProducts(filteredList);
     setCurPageNum(1);
   }
+
+  if (isLoading) return "Loading...";
 
   const pagesCount = Math.ceil(searchedProducts.length / itemsPerPage);
 
