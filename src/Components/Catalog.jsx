@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import CatalogPagesLinks from "./CatalogPagesLinks";
 import CatalogBoard from "./CatalogBoard";
-import { itemsPerPage, apiUrl } from "./constants";
+import { itemsPerPage, serverHost } from "./constants";
 import CatalogControls from "./CatalogControls";
+
+const apiUrl = `${serverHost}/products`;
 
 export default function Catalog() {
   const [allProducts, setAllProducts] = useState([]);

@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { apiUrl } from "./constants";
+import { serverHost } from "./constants";
 
 export default function ProductPage() {
   const { id } = useParams();
@@ -10,6 +10,8 @@ export default function ProductPage() {
 
   useEffect(() => {
     (async () => {
+
+      const apiUrl = `${serverHost}/products`;
       const res = await fetch(`${apiUrl}/${id}`)
       const data = await res.json();
       setProduct(data);
